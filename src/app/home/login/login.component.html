@@ -1,0 +1,26 @@
+<div class="authForm">
+  <h1>Авторизация</h1>
+  <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Введите Email!">
+        <nz-input-group nzPrefixIcon="user">
+          <input type="email" nz-input formControlName="login" placeholder="Email" />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Введите пароль!">
+        <nz-input-group nzPrefixIcon="lock">
+          <input type="password" nz-input formControlName="password" placeholder="Пароль" />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <div>
+    </div>
+    <button nz-button [nzLoading]="loading" [nzType]="'primary'">Войти</button>
+    <button nzType="link" nz-button routerLink="/register">или пройдите регистрацию</button>
+    <div style="text-align: right">
+      <button nzType="link" nz-button routerLink="/reset-password">Забыли пароль?</button>
+    </div>
+  </form>
+</div>

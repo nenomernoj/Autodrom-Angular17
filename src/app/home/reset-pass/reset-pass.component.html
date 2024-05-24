@@ -1,0 +1,16 @@
+<div class="authForm">
+  <h1>Сброс пароля</h1>
+  <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Введите ИИН!">
+        <nz-input-group nzPrefixIcon="user">
+          <input type="text" nz-input formControlName="login" placeholder="ИИН" />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <div>
+    </div>
+    <button nz-button [nzLoading]="loading" [nzType]="'primary'">Сбросить</button>
+    <button nz-button nzType="link" routerLink="/">Отмена</button>
+  </form>
+</div>

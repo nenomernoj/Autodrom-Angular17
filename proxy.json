@@ -1,0 +1,8 @@
+{
+  "/api": {
+    "target": "https://www.driving-school.terra-soft.gq/",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  }
+}
