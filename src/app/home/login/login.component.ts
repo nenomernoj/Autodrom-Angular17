@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {FormControl, FormGroup, NonNullableFormBuilder, Validators} from "@angular/forms";
-import {HomeService} from "../home.service";
+import {AuthService} from "../../auth.service";
 
 @Component({
   selector: 'app-login',
@@ -9,7 +9,7 @@ import {HomeService} from "../home.service";
 })
 export class LoginComponent {
   constructor(private fb: NonNullableFormBuilder,
-              private homeService: HomeService) {
+              private authService: AuthService) {
   }
 
   loading = false;
@@ -25,7 +25,7 @@ export class LoginComponent {
     if (this.validateForm.valid) {
       console.log('submit', this.validateForm.value);
       this.loading = true;
-      this.homeService.login(this.validateForm.value).subscribe(res => {
+      this.authService.login(this.validateForm.value).subscribe(res => {
         console.log(res);
         this.loading = false;
       }, err => {

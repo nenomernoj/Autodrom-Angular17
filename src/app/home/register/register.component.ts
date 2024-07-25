@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {FormControl, FormGroup, NonNullableFormBuilder, Validators} from "@angular/forms";
-import {HomeService} from "../home.service";
 import {NzNotificationService} from "ng-zorro-antd/notification";
+import {AuthService} from "../../auth.service";
 
 @Component({
   selector: 'app-register',
@@ -11,7 +11,7 @@ import {NzNotificationService} from "ng-zorro-antd/notification";
 export class RegisterComponent {
   constructor(private fb: NonNullableFormBuilder,
               private notif: NzNotificationService,
-              private homeService: HomeService) {
+              private authService: AuthService) {
   }
 
   loading = false;
@@ -32,7 +32,7 @@ export class RegisterComponent {
     if (this.validateForm.valid) {
       console.log('submit', this.validateForm.value);
       this.loading = true;
-      this.homeService.register(this.validateForm.value).subscribe(res => {
+      this.authService.register(this.validateForm.value).subscribe(res => {
         this.loading = false;
         this.validateForm.reset();
         this.notif.success('Вы успешно зарегистрировались', 'Используйте ИИН и пароль для входа в систему');

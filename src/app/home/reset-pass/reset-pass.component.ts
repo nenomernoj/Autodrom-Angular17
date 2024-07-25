@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {FormControl, FormGroup, NonNullableFormBuilder, Validators} from "@angular/forms";
-import {HomeService} from "../home.service";
 import {NzNotificationService} from "ng-zorro-antd/notification";
+import {AuthService} from "../../auth.service";
 
 @Component({
   selector: 'app-reset-pass',
@@ -11,7 +11,7 @@ import {NzNotificationService} from "ng-zorro-antd/notification";
 export class ResetPassComponent {
   constructor(private fb: NonNullableFormBuilder,
               private notif: NzNotificationService,
-              private homeService: HomeService) {
+              private authService: AuthService) {
   }
 
   loading = false;
@@ -25,7 +25,7 @@ export class ResetPassComponent {
     if (this.validateForm.valid) {
       console.log('submit', this.validateForm.value);
       this.loading = true;
-      this.homeService.resetPassword(this.validateForm.value).subscribe(res => {
+      this.authService.resetPassword(this.validateForm.value).subscribe(res => {
         this.loading = false;
         this.notif.success('Пароль сброшен', 'На вашу почту вымлано пиьсмо');
       }, err => {
