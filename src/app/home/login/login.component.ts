@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {FormControl, FormGroup, NonNullableFormBuilder, Validators} from "@angular/forms";
 import {AuthService} from "../../auth.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -9,6 +10,7 @@ import {AuthService} from "../../auth.service";
 })
 export class LoginComponent {
   constructor(private fb: NonNullableFormBuilder,
+              private router: Router,
               private authService: AuthService) {
   }
 
@@ -26,6 +28,8 @@ export class LoginComponent {
       console.log('submit', this.validateForm.value);
       this.loading = true;
       this.authService.login(this.validateForm.value).subscribe(res => {
+        localStorage.setItem('userData', JSON.stringify(res));
+        this.router.navigate(['/portal'])
         console.log(res);
         this.loading = false;
       }, err => {

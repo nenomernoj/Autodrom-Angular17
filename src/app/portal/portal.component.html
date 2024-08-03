@@ -1,0 +1,47 @@
+<nz-layout>
+  <nz-sider nzCollapsible nzWidth="200px">
+    <div class="logo"></div>
+    <ul nz-menu nzTheme="dark" nzMode="inline">
+      <li nz-menu-item routerLink="lessons">
+        <span nz-icon nzType="pie-chart"></span>
+        <span>Упражнения</span>
+      </li>
+      <li nz-menu-item routerLink="orgs">
+        <span nz-icon nzType="desktop"></span>
+        <span>Организации</span>
+      </li>
+      <li nz-menu-item>
+        <span nz-icon nzType="team"></span>
+        <span>Пользователи</span>
+      </li>
+      <li nz-menu-item>
+        <span nz-icon nzType="file"></span>
+        <span>Результаты</span>
+      </li>
+    </ul>
+  </nz-sider>
+  <nz-layout style="min-height: 100vh;">
+    <nz-header>
+      <div class="avatarBlock" nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu">
+        <nz-avatar style="background-color: #001529" [nzText]="userData?.fullName[0]"></nz-avatar>
+        <p>{{ userData?.fullName }}</p>
+      </div>
+    </nz-header>
+    <nz-content>
+      <app-breadcrumbs></app-breadcrumbs>
+      <div class="inner-content">
+        <router-outlet></router-outlet>
+      </div>
+    </nz-content>
+    <nz-footer>DriveSchool 2024</nz-footer>
+  </nz-layout>
+</nz-layout>
+
+<nz-dropdown-menu #menu="nzDropdownMenu">
+  <ul nz-menu style="width: 200px; float:right;">
+    <li nz-menu-item>Профиль</li>
+    <li nz-menu-item>Настройки</li>
+    <li nz-menu-divider></li>
+    <li nz-menu-item>Выйти</li>
+  </ul>
+</nz-dropdown-menu>

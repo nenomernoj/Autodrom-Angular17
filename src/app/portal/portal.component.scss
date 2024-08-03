@@ -1,0 +1,49 @@
+.logo {
+  height: 32px;
+  margin: 16px;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+nz-header {
+  background: #fff;
+  padding: 0;
+}
+
+nz-content {
+  margin: 0 16px;
+}
+
+.inner-content {
+  padding: 24px;
+  background: #fff;
+  min-height: 360px;
+}
+
+nz-footer {
+  text-align: center;
+}
+
+.avatarBlock {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  padding-right: 20px;
+  nz-avatar {
+    margin-right: 10px;
+  }
+
+  p {
+    padding: 0;
+    margin: 0;
+  }
+}
+
+.nameRole {
+  margin-left: 20px;
+  height: 64px;
+
+  b {
+    display: block;
+    height: 16px;
+  }
+}
