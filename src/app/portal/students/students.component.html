@@ -1,0 +1,19 @@
+<h2>Экзаменуемые</h2>
+<nz-table class="clickableTable" nzSize="middle" S #basicTable [nzData]="listOfData">
+  <thead>
+  <tr>
+    <th>ФИО</th>
+    <th>ИИН</th>
+    <th>Автошкола</th>
+    <th>Возраст</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of basicTable.data">
+    <td>{{ data.name }}</td>
+    <td>{{data.iin}}</td>
+    <td>{{data.school}}</td>
+    <td>{{data.age}}</td>
+  </tr>
+  </tbody>
+</nz-table>

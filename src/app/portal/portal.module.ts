@@ -16,6 +16,7 @@ import { ExamDetailsComponent } from './exams/exam-details/exam-details.componen
 import {CdkDrag, CdkDropList} from "@angular/cdk/drag-drop";
 import {NzColDirective, NzRowDirective} from "ng-zorro-antd/grid";
 import {NzInputDirective} from "ng-zorro-antd/input";
+import { StudentsComponent } from './students/students.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import {NzInputDirective} from "ng-zorro-antd/input";
     OrganizationsComponent,
     OrgDetailsComponent,
     ExamsComponent,
-    ExamDetailsComponent
+    ExamDetailsComponent,
+    StudentsComponent
   ],
   exports: [
     BreadcrumbsComponent
