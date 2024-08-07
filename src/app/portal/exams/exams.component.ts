@@ -1,22 +1,22 @@
 import {Component, OnInit} from '@angular/core';
 import {BreadcrumbService} from "../breadcrumbs.service";
-import {lessonsList} from "../mockData";
+import {drivingLicenses} from "../mockData";
 
 @Component({
-  selector: 'app-lessons',
-  templateUrl: './lessons.component.html',
-  styleUrl: './lessons.component.scss'
+  selector: 'app-exams',
+  templateUrl: './exams.component.html',
+  styleUrl: './exams.component.scss'
 })
-export class LessonsComponent implements OnInit {
+export class ExamsComponent implements OnInit {
   constructor(private breadcrumbService: BreadcrumbService) {
   }
 
-  listOfData = lessonsList;
+  listOfData = drivingLicenses;
 
   ngOnInit() {
     this.breadcrumbService.setBreadcrumbs([
       {label: 'Главная', url: '/portal'},
-      {label: 'Упражнения', url: '/portal/lessons'},
+      {label: 'Экзамены', url: '/portal/exams'},
     ]);
   }
 }

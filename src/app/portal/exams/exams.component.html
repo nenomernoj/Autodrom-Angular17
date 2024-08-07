@@ -1,12 +1,14 @@
 <nz-table class="clickableTable" [nzShowPagination]="false" nzSize="middle" S #basicTable [nzData]="listOfData">
   <thead>
   <tr>
-    <th>Название</th>
+    <th>Категория</th>
+    <th>Описание</th>
   </tr>
   </thead>
   <tbody>
   <tr *ngFor="let data of basicTable.data">
-    <td [routerLink]="['/portal/lessons/' + data.path]">{{ data.title }}</td>
+    <td [routerLink]="['/portal/exams/' + data.title]">{{ data.title }}</td>
+    <td [routerLink]="['/portal/exams/' + data.title]">{{data.desc}}</td>
   </tr>
   </tbody>
 </nz-table>

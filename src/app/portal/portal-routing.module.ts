@@ -6,6 +6,8 @@ import {LessonsComponent} from "./lessons/lessons.component";
 import {LessonDetailComponent} from "./lessons/lesson-detail/lesson-detail.component";
 import {OrganizationsComponent} from "./organizations/organizations.component";
 import {OrgDetailsComponent} from "./organizations/org-details/org-details.component";
+import {ExamsComponent} from "./exams/exams.component";
+import {ExamDetailsComponent} from "./exams/exam-details/exam-details.component";
 
 const routes: Routes = [
   {
@@ -29,8 +31,16 @@ const routes: Routes = [
         component: LessonsComponent
       },
       {
-        path: "lessons/lesson-details",
+        path: "lessons/:id",
         component: LessonDetailComponent
+      },
+      {
+        path: "exams",
+        component: ExamsComponent
+      },
+      {
+        path: "exams/:id",
+        component: ExamDetailsComponent
       }
 
     ]

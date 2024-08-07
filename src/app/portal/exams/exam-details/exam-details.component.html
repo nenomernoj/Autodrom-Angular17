@@ -1,0 +1,18 @@
+<h2>
+  {{exam.title}} <small>{{exam.desc}}</small>
+</h2>
+
+<div nz-row>
+  <div nz-col nzSpan="12">
+    <h3>Порядок упражнений экзамена</h3>
+    <div class="drag-container" cdkDropList id="todo" [cdkDropListConnectedTo]="['done']" [cdkDropListData]="todo" (cdkDropListDropped)="drop($event)">
+      <div class="item" cdkDrag *ngFor="let item of todo">{{item.title}}</div>
+    </div>
+  </div>
+  <div nz-col nzSpan="12">
+    <h3>Незадействованные упражнения в экзамене</h3>
+    <div class="drag-container" cdkDropList id="done" [cdkDropListConnectedTo]="['todo']" [cdkDropListData]="done" (cdkDropListDropped)="drop($event)">
+      <div class="item" cdkDrag *ngFor="let item of done">{{item.title}}</div>
+    </div>
+  </div>
+</div>

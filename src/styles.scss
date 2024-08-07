@@ -2,6 +2,7 @@
 nz-form-control {
   margin-bottom: 16px;
 }
+
 .authForm {
   max-width: 450px;
   display: block;
@@ -14,3 +15,32 @@ h1 {
   text-align: center;
 }
 
+th {
+  padding-left: 20px;
+}
+
+.clickableTable {
+  td {
+    cursor: pointer;
+  }
+
+  tr {
+    transition: .3s;
+
+    &:hover {
+      background: #e8eaeb;
+    }
+  }
+}
+
+td {
+  padding-left: 20px;
+  height: 45px;
+  border-bottom: 1px solid #e8eaeb;
+}
+
+.underTable{
+  display: flex;
+  justify-content: end;
+  margin: 20px 0;
+}

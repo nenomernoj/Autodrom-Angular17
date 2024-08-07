@@ -1,1 +1,21 @@
-<p>lesson-detail works!</p>
+<h2>{{this.lesson.title}}   </h2>
+<p>Ошибки и штрафные балы</p>
+<nz-table [nzShowPagination]="false" nzSize="middle" S #basicTable [nzData]="lesson.points">
+  <thead>
+  <tr>
+    <th>Условие</th>
+    <th>Штрафные баллы</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of basicTable.data">
+   <td>{{data.title}}</td>
+    <td><input class="points" nz-input type="number" [value]="data.count"></td>
+  </tr>
+  </tbody>
+</nz-table>
+<div class="underTable">
+  <button nz-button nzType="primary">Сохранить изменения</button>
+</div>
+
+

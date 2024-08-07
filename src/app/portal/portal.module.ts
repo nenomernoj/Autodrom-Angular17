@@ -10,6 +10,12 @@ import {NzBreadCrumbComponent, NzBreadCrumbItemComponent} from "ng-zorro-antd/br
 import {NzButtonComponent} from "ng-zorro-antd/button";
 import { OrganizationsComponent } from './organizations/organizations.component';
 import { OrgDetailsComponent } from './organizations/org-details/org-details.component';
+import { ExamsComponent } from './exams/exams.component';
+import {NzTableComponent} from "ng-zorro-antd/table";
+import { ExamDetailsComponent } from './exams/exam-details/exam-details.component';
+import {CdkDrag, CdkDropList} from "@angular/cdk/drag-drop";
+import {NzColDirective, NzRowDirective} from "ng-zorro-antd/grid";
+import {NzInputDirective} from "ng-zorro-antd/input";
 
 
 @NgModule({
@@ -19,7 +25,9 @@ import { OrgDetailsComponent } from './organizations/org-details/org-details.com
     LessonDetailComponent,
     BreadcrumbsComponent,
     OrganizationsComponent,
-    OrgDetailsComponent
+    OrgDetailsComponent,
+    ExamsComponent,
+    ExamDetailsComponent
   ],
   exports: [
     BreadcrumbsComponent
@@ -30,7 +38,13 @@ import { OrgDetailsComponent } from './organizations/org-details/org-details.com
     NzMessageModule,
     NzBreadCrumbComponent,
     NzBreadCrumbItemComponent,
-    NzButtonComponent
+    NzButtonComponent,
+    NzTableComponent,
+    CdkDropList,
+    CdkDrag,
+    NzRowDirective,
+    NzColDirective,
+    NzInputDirective
   ]
 })
 export class PortalModule {

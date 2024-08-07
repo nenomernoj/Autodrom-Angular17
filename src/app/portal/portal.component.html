@@ -1,18 +1,28 @@
 <nz-layout>
-  <nz-sider nzCollapsible nzWidth="200px">
-    <div class="logo"></div>
+  <nz-sider nzCollapsible nzWidth="250px">
+    <div class="logo">SOFIA vision</div>
     <ul nz-menu nzTheme="dark" nzMode="inline">
-      <li nz-menu-item routerLink="lessons">
-        <span nz-icon nzType="pie-chart"></span>
-        <span>Упражнения</span>
+
+      <li nz-submenu nzTitle="Настройка экзаменов" nzIcon="pie-chart">
+        <ul>
+          <li nz-menu-item routerLink="exams">
+            <span nz-icon nzType="pie-chart"></span>
+            <span>Экзамены</span>
+          </li>
+          <li nz-menu-item routerLink="lessons">
+            <span nz-icon nzType="pie-chart"></span>
+            <span>Детали упражнений</span>
+          </li>
+        </ul>
       </li>
+
       <li nz-menu-item routerLink="orgs">
         <span nz-icon nzType="desktop"></span>
         <span>Организации</span>
       </li>
       <li nz-menu-item>
         <span nz-icon nzType="team"></span>
-        <span>Пользователи</span>
+        <span>Экзаменуемые</span>
       </li>
       <li nz-menu-item>
         <span nz-icon nzType="file"></span>
@@ -33,7 +43,7 @@
         <router-outlet></router-outlet>
       </div>
     </nz-content>
-    <nz-footer>DriveSchool 2024</nz-footer>
+    <nz-footer>Sofia vision 2024</nz-footer>
   </nz-layout>
 </nz-layout>
 
