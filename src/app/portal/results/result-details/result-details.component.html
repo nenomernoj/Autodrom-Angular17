@@ -1,0 +1,73 @@
+<div nz-row nzGutter="24">
+  <div nz-col nzSpan="8">
+    <div class="infoStudent">
+      <div>
+        <span>ФИО:</span><span>{{ result.student.name }}</span>
+      </div>
+      <div>
+        <span>ИИН:</span><span>{{ result.student.iin }}</span>
+      </div>
+      <div>
+        <span>Номер заявки:</span><span>{{ result.id }}</span>
+      </div>
+      <div>
+        <span>Дата проведения экзамена:</span><span>{{ result.exam.date | date:"dd.MM.yyyy" }}</span>
+      </div>
+      <div>
+        <span>Время начала экзамена:</span><span>09:00:00</span>
+      </div>
+      <div>
+        <span>Время окончания экзамена:</span><span>09:21:00</span>
+      </div>
+      <div>
+        <span>Сумма штрафных баллов:</span><span>{{ result.exam.totalDeductions }}</span>
+      </div>
+      <div>
+        <span>Результат сдачи экзамена:</span><span>{{ result.exam.passed ? 'Сдан' : 'Провален' }}</span>
+      </div>
+      <div>
+        <span>Категория:</span><span>{{ result.car.category }}</span>
+      </div>
+      <div>
+        <span>ГРНЗ:</span><span>001PDD01</span>
+      </div>
+      <div>
+        <span>Марка, модель ТС:</span><span>{{ result.car.brand }} {{ result.car.model }}</span>
+      </div>
+      <div>
+        <span>Учебная организация:</span><span>{{ result.student.school }}</span>
+      </div>
+      <div>
+        <span>Место проведения экзамена:</span><span>г.Астана, ул.С.Муканова, зд.2</span>
+      </div>
+    </div>
+  </div>
+  <div nz-col nzOffset="2" nzSpan="14">
+    <nz-table [nzShowPagination]="false" nzSize="middle" S #basicTable
+              [nzData]="result.exam.exercises">
+      <thead>
+      <tr>
+        <th>Упражнение</th>
+        <th>Контрольный пункт</th>
+        <th>Установленные штрафные баллы</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let data of basicTable.data">
+        <td>{{ data.name }}</td>
+        <td>
+          <ul >
+            <li *ngFor="let subData of data.deductions">{{ subData.description }}</li>
+          </ul>
+        </td>
+        <td>
+          <ul >
+            <li *ngFor="let subData of data.deductions">{{ subData.points }}</li>
+          </ul>
+        </td>
+      </tr>
+      </tbody>
+    </nz-table>
+
+  </div>
+</div>

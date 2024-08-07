@@ -17,6 +17,10 @@ import {CdkDrag, CdkDropList} from "@angular/cdk/drag-drop";
 import {NzColDirective, NzRowDirective} from "ng-zorro-antd/grid";
 import {NzInputDirective} from "ng-zorro-antd/input";
 import { StudentsComponent } from './students/students.component';
+import { CarsComponent } from './cars/cars.component';
+import { ResultsComponent } from './results/results.component';
+import { ResultDetailsComponent } from './results/result-details/result-details.component';
+import { SchedulerComponent } from './scheduler/scheduler.component';
 
 
 @NgModule({
@@ -29,7 +33,11 @@ import { StudentsComponent } from './students/students.component';
     OrgDetailsComponent,
     ExamsComponent,
     ExamDetailsComponent,
-    StudentsComponent
+    StudentsComponent,
+    CarsComponent,
+    ResultsComponent,
+    ResultDetailsComponent,
+    SchedulerComponent
   ],
   exports: [
     BreadcrumbsComponent

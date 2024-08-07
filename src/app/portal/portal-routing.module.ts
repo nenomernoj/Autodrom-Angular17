@@ -10,6 +10,10 @@ import {ExamsComponent} from "./exams/exams.component";
 import {ExamDetailsComponent} from "./exams/exam-details/exam-details.component";
 import {StudentsComponent} from "./students/students.component";
 
+import {CarsComponent} from "./cars/cars.component";
+import {ResultsComponent} from "./results/results.component";
+import {ResultDetailsComponent} from "./results/result-details/result-details.component";
+
 const routes: Routes = [
   {
     path: "",
@@ -46,6 +50,18 @@ const routes: Routes = [
       {
         path: "students",
         component: StudentsComponent
+      },
+      {
+        path: "cars",
+        component: CarsComponent
+      },
+      {
+        path:'results',
+        component: ResultsComponent
+      },
+      {
+        path:'results/:id',
+        component: ResultDetailsComponent
       }
     ]
   }

@@ -232,35 +232,259 @@ export const drivingLicenses = [
   }
 ];
 export const students = [
-  { id: 1, name: 'Иванов Иван Иванович', age: 25, school: 'ТОО "автошкола №1', iin: '890101300000' },
-  { id: 2, name: 'Петров Петр Петрович', age: 32, school: 'ТОО "автошкола №2', iin: '870202400001' },
-  { id: 3, name: 'Сидоров Сидор Сидорович', age: 19, school: 'ТОО "автошкола №3', iin: '010303500002' },
-  { id: 4, name: 'Александров Александр Александрович', age: 45, school: 'ТОО "автошкола №4', iin: '760404600003' },
-  { id: 5, name: 'Васильев Василий Васильевич', age: 28, school: 'ТОО "автошкола №5', iin: '950505700004' },
-  { id: 6, name: 'Михайлов Михаил Михайлович', age: 22, school: 'ТОО "автошкола №1', iin: '010606800005' },
-  { id: 7, name: 'Николаев Николай Николаевич', age: 35, school: 'ТОО "автошкола №2', iin: '880707900006' },
-  { id: 8, name: 'Федоров Федор Федорович', age: 30, school: 'ТОО "автошкола №3', iin: '930808100007' },
-  { id: 9, name: 'Смирнов Сергей Сергеевич', age: 40, school: 'ТОО "автошкола №4', iin: '830909200008' },
-  { id: 10, name: 'Кузнецов Константин Константинович', age: 27, school: 'ТОО "автошкола №5', iin: '960101300009' },
-  { id: 11, name: 'Попов Павел Павлович', age: 24, school: 'ТОО "автошкола №1', iin: '990202400010' },
-  { id: 12, name: 'Волков Виктор Викторович', age: 33, school: 'ТОО "автошкола №2', iin: '870303500011' },
-  { id: 13, name: 'Зайцев Захар Захарович', age: 29, school: 'ТОО "автошкола №3', iin: '950404600012' },
-  { id: 14, name: 'Борисов Борис Борисович', age: 38, school: 'ТОО "автошкола №4', iin: '860505700013' },
-  { id: 15, name: 'Соколов Семен Семенович', age: 26, school: 'ТОО "автошкола №5', iin: '980606800014' },
-  { id: 16, name: 'Орлов Олег Олегович', age: 21, school: 'ТОО "автошкола №1', iin: '010707900015' },
-  { id: 17, name: 'Белый Борис Борисович', age: 34, school: 'ТОО "автошкола №2', iin: '890808100016' },
-  { id: 18, name: 'Семенов Семен Семенович', age: 36, school: 'ТОО "автошкола №3', iin: '880909200017' },
-  { id: 19, name: 'Егоров Егор Егорович', age: 44, school: 'ТОО "автошкола №4', iin: '790101300018' },
-  { id: 20, name: 'Павлов Павел Павлович', age: 23, school: 'ТОО "автошкола №5', iin: '010202400019' },
-  { id: 21, name: 'Ильин Илья Ильич', age: 31, school: 'ТОО "автошкола №1', iin: '870303500020' },
-  { id: 22, name: 'Тихонов Тимофей Тимофеевич', age: 28, school: 'ТОО "автошкола №2', iin: '950404600021' },
-  { id: 23, name: 'Андреев Андрей Андреевич', age: 37, school: 'ТОО "автошкола №3', iin: '860505700022' },
-  { id: 24, name: 'Григорьев Григорий Григорьевич', age: 42, school: 'ТОО "автошкола №4', iin: '810606800023' },
-  { id: 25, name: 'Морозов Михаил Михайлович', age: 39, school: 'ТОО "автошкола №5', iin: '850707900024' },
-  { id: 26, name: 'Лебедев Леонид Леонидович', age: 20, school: 'ТОО "автошкола №1', iin: '020808100025' },
-  { id: 27, name: 'Новиков Николай Николаевич', age: 35, school: 'ТОО "автошкола №2', iin: '880909200026' },
-  { id: 28, name: 'Поляков Павел Павлович', age: 32, school: 'ТОО "автошкола №3', iin: '910101300027' },
-  { id: 29, name: 'Козлов Кирилл Кириллович', age: 41, school: 'ТОО "автошкола №4', iin: '820202400028' },
-  { id: 30, name: 'Медведев Михаил Михайлович', age: 29, school: 'ТОО "автошкола №5', iin: '950303500029' },
+  {id: 1, name: 'Иванов Иван Иванович', age: 25, school: 'ТОО "автошкола №1', iin: '890101300000'},
+  {id: 2, name: 'Петров Петр Петрович', age: 32, school: 'ТОО "автошкола №2', iin: '870202400001'},
+  {id: 3, name: 'Сидоров Сидор Сидорович', age: 19, school: 'ТОО "автошкола №3', iin: '010303500002'},
+  {id: 4, name: 'Александров Александр Александрович', age: 45, school: 'ТОО "автошкола №4', iin: '760404600003'},
+  {id: 5, name: 'Васильев Василий Васильевич', age: 28, school: 'ТОО "автошкола №5', iin: '950505700004'},
+  {id: 6, name: 'Михайлов Михаил Михайлович', age: 22, school: 'ТОО "автошкола №1', iin: '010606800005'},
+  {id: 7, name: 'Николаев Николай Николаевич', age: 35, school: 'ТОО "автошкола №2', iin: '880707900006'},
+  {id: 8, name: 'Федоров Федор Федорович', age: 30, school: 'ТОО "автошкола №3', iin: '930808100007'},
+  {id: 9, name: 'Смирнов Сергей Сергеевич', age: 40, school: 'ТОО "автошкола №4', iin: '830909200008'},
+  {id: 10, name: 'Кузнецов Константин Константинович', age: 27, school: 'ТОО "автошкола №5', iin: '960101300009'},
+  {id: 11, name: 'Попов Павел Павлович', age: 24, school: 'ТОО "автошкола №1', iin: '990202400010'},
+  {id: 12, name: 'Волков Виктор Викторович', age: 33, school: 'ТОО "автошкола №2', iin: '870303500011'},
+  {id: 13, name: 'Зайцев Захар Захарович', age: 29, school: 'ТОО "автошкола №3', iin: '950404600012'},
+  {id: 14, name: 'Борисов Борис Борисович', age: 38, school: 'ТОО "автошкола №4', iin: '860505700013'},
+  {id: 15, name: 'Соколов Семен Семенович', age: 26, school: 'ТОО "автошкола №5', iin: '980606800014'},
+  {id: 16, name: 'Орлов Олег Олегович', age: 21, school: 'ТОО "автошкола №1', iin: '010707900015'},
+  {id: 17, name: 'Белый Борис Борисович', age: 34, school: 'ТОО "автошкола №2', iin: '890808100016'},
+  {id: 18, name: 'Семенов Семен Семенович', age: 36, school: 'ТОО "автошкола №3', iin: '880909200017'},
+  {id: 19, name: 'Егоров Егор Егорович', age: 44, school: 'ТОО "автошкола №4', iin: '790101300018'},
+  {id: 20, name: 'Павлов Павел Павлович', age: 23, school: 'ТОО "автошкола №5', iin: '010202400019'},
+  {id: 21, name: 'Ильин Илья Ильич', age: 31, school: 'ТОО "автошкола №1', iin: '870303500020'},
+  {id: 22, name: 'Тихонов Тимофей Тимофеевич', age: 28, school: 'ТОО "автошкола №2', iin: '950404600021'},
+  {id: 23, name: 'Андреев Андрей Андреевич', age: 37, school: 'ТОО "автошкола №3', iin: '860505700022'},
+  {id: 24, name: 'Григорьев Григорий Григорьевич', age: 42, school: 'ТОО "автошкола №4', iin: '810606800023'},
+  {id: 25, name: 'Морозов Михаил Михайлович', age: 39, school: 'ТОО "автошкола №5', iin: '850707900024'},
+  {id: 26, name: 'Лебедев Леонид Леонидович', age: 20, school: 'ТОО "автошкола №1', iin: '020808100025'},
+  {id: 27, name: 'Новиков Николай Николаевич', age: 35, school: 'ТОО "автошкола №2', iin: '880909200026'},
+  {id: 28, name: 'Поляков Павел Павлович', age: 32, school: 'ТОО "автошкола №3', iin: '910101300027'},
+  {id: 29, name: 'Козлов Кирилл Кириллович', age: 41, school: 'ТОО "автошкола №4', iin: '820202400028'},
+  {id: 30, name: 'Медведев Михаил Михайлович', age: 29, school: 'ТОО "автошкола №5', iin: '950303500029'},
 ];
+export const carData = [
+  // Category B
+  {
+    id: 1,
+    brand: 'Toyota',
+    model: 'Corolla',
+    year: 2018,
+    category: 'B',
+    vin: 'JTDBU4EE9A9123456',
+    hikVisionId: 'HIKB001'
+  },
+  {id: 2, brand: 'Honda', model: 'Civic', year: 2019, category: 'B', vin: '2HGFB2F5XCH567890', hikVisionId: 'HIKB002'},
+  {id: 3, brand: 'Ford', model: 'Focus', year: 2020, category: 'B', vin: '1FAHP3H2XCL345678', hikVisionId: 'HIKB003'},
+  {
+    id: 4,
+    brand: 'Chevrolet',
+    model: 'Cruze',
+    year: 2017,
+    category: 'B',
+    vin: '1G1BE5SM5H7213456',
+    hikVisionId: 'HIKB004'
+  },
+  {
+    id: 5,
+    brand: 'Volkswagen',
+    model: 'Golf',
+    year: 2021,
+    category: 'B',
+    vin: '3VW217AU4FM567890',
+    hikVisionId: 'HIKB005'
+  },
 
+  // Category C
+  {
+    id: 6,
+    brand: 'Mercedes-Benz',
+    model: 'C-Class',
+    year: 2018,
+    category: 'C',
+    vin: 'WDDGF8AB9CA123456',
+    hikVisionId: 'HIKC001'
+  },
+  {id: 7, brand: 'BMW', model: '3 Series', year: 2019, category: 'C', vin: 'WBA3B1C59FP123456', hikVisionId: 'HIKC002'},
+
+  // Category D
+  {id: 8, brand: 'Audi', model: 'A4', year: 2020, category: 'D', vin: 'WAUDFAFL4BN123456', hikVisionId: 'HIKD001'},
+  {id: 9, brand: 'Lexus', model: 'ES', year: 2021, category: 'D', vin: 'JTHBK1GG6D2123456', hikVisionId: 'HIKD002'},
+
+  // Category E
+  {
+    id: 10,
+    brand: 'Tesla',
+    model: 'Model S',
+    year: 2020,
+    category: 'E',
+    vin: '5YJSA1E23LF123456',
+    hikVisionId: 'HIKE001'
+  },
+  {id: 11, brand: 'Jaguar', model: 'XF', year: 2019, category: 'E', vin: 'SAJWA0ES7H1234567', hikVisionId: 'HIKE002'},
+
+  // Category F
+  {id: 12, brand: 'Ferrari', model: '488', year: 2018, category: 'F', vin: 'ZFF80AMT3F0213456', hikVisionId: 'HIKF001'},
+  {
+    id: 13,
+    brand: 'Lamborghini',
+    model: 'Huracan',
+    year: 2017,
+    category: 'F',
+    vin: 'ZHWUR1ZFXFL123456',
+    hikVisionId: 'HIKF002'
+  },
+
+  // Category G
+  {id: 14, brand: 'Porsche', model: '911', year: 2021, category: 'G', vin: 'WP0AA2A97FS123456', hikVisionId: 'HIKG001'},
+  {
+    id: 15,
+    brand: 'McLaren',
+    model: '720S',
+    year: 2020,
+    category: 'G',
+    vin: 'SBM14DCA0JW123456',
+    hikVisionId: 'HIKG002'
+  },
+
+  // Category H
+  {
+    id: 16,
+    brand: 'Rolls-Royce',
+    model: 'Ghost',
+    year: 2019,
+    category: 'H',
+    vin: 'SCA664S52JX123456',
+    hikVisionId: 'HIKH001'
+  },
+  {
+    id: 17,
+    brand: 'Bentley',
+    model: 'Mulsanne',
+    year: 2018,
+    category: 'H',
+    vin: 'SCBBG7ZH1GC123456',
+    hikVisionId: 'HIKH002'
+  }
+];
+const examResult = {
+  student: {
+    id: 1,
+    name: 'Иванов Иван Иванович',
+    age: 25,
+    school: 'ТОО "автошкола №1',
+    iin: '890101300000',
+    category: 'B'
+  },
+  car: {
+    id: 1,
+    brand: 'Toyota',
+    model: 'Corolla',
+    year: 2018,
+    category: 'B',
+    vin: 'JTDBU4EE9A9123456',
+    hikVisionId: 'HIKB001'
+  },
+  exam: {
+    date: '2024-08-07',
+    exercises: [
+      {
+        name: 'Старт',
+        result: {
+          passed: true,
+          score: 100,
+          deductions: [
+            { description: 'Не пристегнул ремень безопасности', points: -5 },
+            { description: 'Не выключил указатель левого поворота на участке 10 метров после линии СТАРТ', points: -5 }
+          ]
+        }
+      },
+      {
+        name: 'Проезд регулируемого перекрестка',
+        result: {
+          passed: true,
+          score: 80,
+          deductions: [
+            { description: 'На проезд перекрестка при разрешающем сигнале светофора затрачено более 20 сек.', points: -20 }
+          ]
+        }
+      },
+      {
+        name: 'Остановка пешеходного перехода при повороте направо',
+        result: {
+          passed: false,
+          score: 70,
+          deductions: [
+            { description: 'Начал движение ранее, чем 3 сек. после остановки', points: -25 },
+            { description: 'Наехал на дорожную разметку', points: -5 }
+          ]
+        }
+      },
+      {
+        name: 'Разворот и парковка',
+        result: {
+          passed: true,
+          score: 85,
+          deductions: [
+            { description: 'Наехал колесом на контрольную линию', points: -20 },
+            { description: 'Затратил на выполнение упражнения более чем 2 мин.', points: -15 }
+          ]
+        }
+      },
+      {
+        name: 'Параллельная парковка задним ходом',
+        result: {
+          passed: true,
+          score: 85,
+          deductions: [
+            { description: 'Затратил на выполнение упражнения более 2 минут', points: -15 }
+          ]
+        }
+      },
+      {
+        name: 'Аварийная остановка',
+        result: {
+          passed: true,
+          score: 80,
+          deductions: [
+            { description: 'Перед началом движения не выключил аварийную световую сигнализацию', points: -20 }
+          ]
+        }
+      },
+      {
+        name: 'Проезд железнодорожного переезда',
+        result: {
+          passed: true,
+          score: 75,
+          deductions: [
+            { description: 'Наехал на линию «СТОП» или пересек её по проекции переднего габарита ТС до остановки', points: -25 }
+          ]
+        }
+      },
+      {
+        name: 'Остановка и начало движения на подъеме',
+        result: {
+          passed: true,
+          score: 75,
+          deductions: [
+            { description: 'Совершил откат ТС на величину более 0,2 метра после остановки или начала движения', points: -20 },
+            { description: 'Не начал движение в течении 30 сек. после остановки', points: -25 }
+          ]
+        }
+      },
+      {
+        name: 'Финиш',
+        result: {
+          passed: true,
+          score: 95,
+          deductions: [
+            { description: 'Не включил указатель правого поворота до пересечения финишной линии', points: -5 }
+          ]
+        }
+      }
+    ],
+    totalScore: 745,
+    passed: true,
+    remarks: 'Студент успешно прошел экзамен, несмотря на незначительные ошибки.'
+  }
+};

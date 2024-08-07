@@ -1,0 +1,23 @@
+<h2>Автопарк</h2>
+<nz-table class="clickableTable" nzSize="middle" S #basicTable [nzData]="listOfData">
+  <thead>
+  <tr>
+    <th>Бренд</th>
+    <th>Модель</th>
+    <th>Год выпуска</th>
+    <th>Категория</th>
+    <th>VIN</th>
+    <th>HIK Vision ID</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of basicTable.data">
+    <td>{{ data.brand }}</td>
+    <td>{{data.model}}</td>
+    <td>{{data.year}}</td>
+    <td>{{data.category}}</td>
+    <td>{{data.vin}}</td>
+    <td>{{data.hikVisionId}}</td>
+  </tr>
+  </tbody>
+</nz-table>
