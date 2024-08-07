@@ -1294,6 +1294,13 @@
   resolved "https://registry.yarnpkg.com/@ctrl/tinycolor/-/tinycolor-3.6.1.tgz#b6c75a56a1947cc916ea058772d666a2c8932f31"
   integrity sha512-SITSV6aIXsuVNV3f3O0f2n/cgyEDWoSqtZMYiAmcsYHydcKrOz3gUxB/iXd/Qf08+IZX4KpgNbvUdMBmWz+kcA==
 
+"@daypilot/daypilot-lite-angular@^3.25.0":
+  version "3.25.0"
+  resolved "https://registry.yarnpkg.com/@daypilot/daypilot-lite-angular/-/daypilot-lite-angular-3.25.0.tgz#539712781d421036d36a090561d64ae63761cfcf"
+  integrity sha512-ockxI9zjvRTRttqialFG2p2RF/UES8DYCcBMrRN5CWWGEUvLX0FoawW+Aembzen9ePt3Nf++o0fGyAPKFaHHGg==
+  dependencies:
+    tslib "^2.3.0"
+
 "@discoveryjs/json-ext@0.5.7":
   version "0.5.7"
   resolved "https://registry.yarnpkg.com/@discoveryjs/json-ext/-/json-ext-0.5.7.tgz#1d572bfbbe14b7704e0ba0f39b74815b84870d70"

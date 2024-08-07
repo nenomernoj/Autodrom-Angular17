@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
+import {CommonModule, registerLocaleData} from '@angular/common';
 import {PortalRoutingModule} from "./portal-routing.module";
 import {NzMessageModule} from "ng-zorro-antd/message";
 import { WelcomeComponent } from './welcome/welcome.component';
@@ -21,8 +21,11 @@ import { CarsComponent } from './cars/cars.component';
 import { ResultsComponent } from './results/results.component';
 import { ResultDetailsComponent } from './results/result-details/result-details.component';
 import { SchedulerComponent } from './scheduler/scheduler.component';
-
-
+import {DayPilotModule} from "@daypilot/daypilot-lite-angular";
+import {DataService} from "./scheduler/data.service";
+import ru from '@angular/common/locales/ru';
+import {NZ_DATE_LOCALE, NZ_I18N, ru_RU} from "ng-zorro-antd/i18n";
+registerLocaleData(ru);
 @NgModule({
   declarations: [
     WelcomeComponent,
@@ -54,7 +57,13 @@ import { SchedulerComponent } from './scheduler/scheduler.component';
     CdkDrag,
     NzRowDirective,
     NzColDirective,
-    NzInputDirective
+    NzInputDirective,
+    DayPilotModule
+  ],
+  providers:[
+    DataService,
+    {provide: NZ_I18N, useValue: ru_RU},
+    { provide: NZ_DATE_LOCALE, useValue: ru },
   ]
 })
 export class PortalModule {
