@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {CommonModule, registerLocaleData} from '@angular/common';
+import {CommonModule} from '@angular/common';
 import {PortalRoutingModule} from "./portal-routing.module";
 import {NzMessageModule} from "ng-zorro-antd/message";
 import {WelcomeComponent} from './welcome/welcome.component';
@@ -33,12 +33,13 @@ import {PortalComponent} from "./portal.component";
 import {NzLayoutModule} from "ng-zorro-antd/layout";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {IconDefinition} from "@ant-design/icons-angular";
-import {DesktopOutline, PieChartOutline, ShopOutline, TeamOutline, UserOutline, CarOutline} from "@ant-design/icons-angular/icons";
+import {DesktopOutline, PieChartOutline, ShopOutline, TeamOutline, UserOutline, CarOutline, VideoCameraOutline} from "@ant-design/icons-angular/icons";
 import {NzIconModule} from "ng-zorro-antd/icon";
 import {NzSelectModule} from "ng-zorro-antd/select";
 import {NzPopconfirmModule} from "ng-zorro-antd/popconfirm";
-const icons: IconDefinition[] = [PieChartOutline, DesktopOutline, UserOutline, TeamOutline, ShopOutline, CarOutline];
-registerLocaleData(ru);
+import { CamsComponent } from './cams/cams.component';
+import {NzDatePickerComponent} from "ng-zorro-antd/date-picker";
+const icons: IconDefinition[] = [PieChartOutline, DesktopOutline, UserOutline, TeamOutline, ShopOutline, CarOutline, VideoCameraOutline];
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ registerLocaleData(ru);
     ResultsComponent,
     ResultDetailsComponent,
     SchedulerComponent,
+    CamsComponent,
   ],
   exports: [
     BreadcrumbsComponent
@@ -84,12 +86,11 @@ registerLocaleData(ru);
     FormsModule,
     ReactiveFormsModule,
     NzSelectModule,
-    NzPopconfirmModule
+    NzPopconfirmModule,
+    NzDatePickerComponent
   ],
   providers: [
-    DataService,
-    {provide: NZ_I18N, useValue: ru_RU},
-    {provide: NZ_DATE_LOCALE, useValue: ru},
+    DataService
   ]
 })
 export class PortalModule {

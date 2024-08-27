@@ -84,4 +84,60 @@ export class PortalService {
       observe: 'response'
     });
   }
+  getCams(): Observable<HttpResponse<any>> {
+    const data = {
+      pageIndex: 0,
+      pageSize: 999,
+    }
+    return this.http.post(`/api/device/getList`, data, {
+      observe: 'response'
+    });
+  }
+
+  addDevice(data: any): Observable<HttpResponse<any>> {
+    return this.http.post(`/api/device/create`, data, {
+      observe: 'response'
+    });
+  }
+  updateDevice(data: any): Observable<HttpResponse<any>> {
+    return this.http.post(`/api/device/update`, data, {
+      observe: 'response'
+    });
+  }
+  deleteDevice(data: any): Observable<HttpResponse<any>> {
+    return this.http.post(`/api/device/delete`, data, {
+      observe: 'response'
+    });
+  }
+  getEnum(key: string): Observable<HttpResponse<any>> {
+    return this.http.get(`/api/enum/getenumvale?code=${key}`, {
+      observe: 'response'
+    });
+  }
+
+  getStudents(): Observable<HttpResponse<any>> {
+    const data = {
+      pageIndex: 0,
+      pageSize: 999,
+    }
+    return this.http.post(`/api/student/list`, data, {
+      observe: 'response'
+    });
+  }
+
+  addStudent(data: any): Observable<HttpResponse<any>> {
+    return this.http.post(`/api/student/create`, data, {
+      observe: 'response'
+    });
+  }
+  updateStudent(data: any): Observable<HttpResponse<any>> {
+    return this.http.post(`/api/student/update`, data, {
+      observe: 'response'
+    });
+  }
+  deleteStudent(data: any): Observable<HttpResponse<any>> {
+    return this.http.post(`/api/student/delete`, data, {
+      observe: 'response'
+    });
+  }
 }

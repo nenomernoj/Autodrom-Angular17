@@ -12,6 +12,7 @@ import {CarsComponent} from "./cars/cars.component";
 import {ResultsComponent} from "./results/results.component";
 import {ResultDetailsComponent} from "./results/result-details/result-details.component";
 import {SchedulerComponent} from "./scheduler/scheduler.component";
+import {CamsComponent} from "./cams/cams.component";
 
 
 const routes: Routes = [
@@ -58,6 +59,10 @@ const routes: Routes = [
       {
         path: 'scheduler',
         component: SchedulerComponent
+      },
+      {
+        path: 'cams',
+        component: CamsComponent
       }
     ]
   }

@@ -2,8 +2,7 @@ import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {NZ_I18N} from 'ng-zorro-antd/i18n';
-import {ru_RU} from 'ng-zorro-antd/i18n';
+import {NZ_I18N, ru_RU} from 'ng-zorro-antd/i18n';
 import {registerLocaleData} from '@angular/common';
 import ru from '@angular/common/locales/ru';
 import {FormsModule} from '@angular/forms';
@@ -12,7 +11,6 @@ import {HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient} from '@angular/c
 import {HomeComponent} from "./home/home.component";
 import {ParamInterceptor} from "./api.interceptor";
 import {AuthInterceptor} from "./auth.interceptor";
-import {IconDefinition} from '@ant-design/icons-angular';
 import {PortalModule} from "./portal/portal.module";
 
 
