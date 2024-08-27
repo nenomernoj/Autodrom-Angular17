@@ -2,8 +2,7 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from "@angular/router";
 import {PortalComponent} from "./portal.component";
 import {WelcomeComponent} from "./welcome/welcome.component";
-import {LessonsComponent} from "./lessons/lessons.component";
-import {LessonDetailComponent} from "./lessons/lesson-detail/lesson-detail.component";
+import {LessonDetailComponent} from "./exams/exam-details/lesson-detail/lesson-detail.component";
 import {OrganizationsComponent} from "./organizations/organizations.component";
 import {ExamsComponent} from "./exams/exams.component";
 import {ExamDetailsComponent} from "./exams/exam-details/exam-details.component";
@@ -29,11 +28,7 @@ const routes: Routes = [
         component: OrganizationsComponent
       },
       {
-        path: "lessons",
-        component: LessonsComponent
-      },
-      {
-        path: "lessons/:id",
+        path: "exams/:idExam/:id",
         component: LessonDetailComponent
       },
       {

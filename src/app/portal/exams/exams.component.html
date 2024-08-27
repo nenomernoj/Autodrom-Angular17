@@ -7,9 +7,9 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let data of basicTable.data">
-    <td [routerLink]="['/portal/exams/' + data.title]">{{ data.title }}</td>
-    <td [routerLink]="['/portal/exams/' + data.title]">{{data.desc}}</td>
+  <tr *ngFor="let data of basicTable.data" (click)="openExam(data)">
+    <td>{{ data.code }}</td>
+    <td>{{data.name}}</td>
   </tr>
   </tbody>
 </nz-table>

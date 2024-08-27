@@ -3,8 +3,7 @@ import {CommonModule, registerLocaleData} from '@angular/common';
 import {PortalRoutingModule} from "./portal-routing.module";
 import {NzMessageModule} from "ng-zorro-antd/message";
 import {WelcomeComponent} from './welcome/welcome.component';
-import {LessonsComponent} from './lessons/lessons.component';
-import {LessonDetailComponent} from './lessons/lesson-detail/lesson-detail.component';
+import {LessonDetailComponent} from './exams/exam-details/lesson-detail/lesson-detail.component';
 import {BreadcrumbsComponent} from './breadcrumbs/breadcrumbs.component';
 import {NzBreadCrumbModule} from "ng-zorro-antd/breadcrumb";
 import {NzButtonModule} from "ng-zorro-antd/button";
@@ -33,14 +32,16 @@ import {NzMenuModule} from "ng-zorro-antd/menu";
 import {PortalComponent} from "./portal.component";
 import {NzLayoutModule} from "ng-zorro-antd/layout";
 import {FormsModule} from "@angular/forms";
-
+import {IconDefinition} from "@ant-design/icons-angular";
+import {DesktopOutline, PieChartOutline, ShopOutline, TeamOutline, UserOutline} from "@ant-design/icons-angular/icons";
+import {NzIconModule} from "ng-zorro-antd/icon";
+const icons: IconDefinition[] = [PieChartOutline, DesktopOutline, UserOutline, TeamOutline, ShopOutline];
 registerLocaleData(ru);
 
 @NgModule({
   declarations: [
     PortalComponent,
     WelcomeComponent,
-    LessonsComponent,
     LessonDetailComponent,
     BreadcrumbsComponent,
     OrganizationsComponent,
@@ -57,6 +58,7 @@ registerLocaleData(ru);
   ],
   imports: [
     CommonModule,
+    NzIconModule.forRoot(icons),
     PortalRoutingModule,
     NzMessageModule,
     NzBreadCrumbModule,
@@ -71,6 +73,7 @@ registerLocaleData(ru);
     NzDropDownModule,
     NzAvatarModule,
     NzMenuModule,
+    NzMessageModule,
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory,

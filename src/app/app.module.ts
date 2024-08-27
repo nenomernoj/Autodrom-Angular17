@@ -13,11 +13,9 @@ import {HomeComponent} from "./home/home.component";
 import {ParamInterceptor} from "./api.interceptor";
 import {AuthInterceptor} from "./auth.interceptor";
 import {IconDefinition} from '@ant-design/icons-angular';
-import {NzIconModule} from 'ng-zorro-antd/icon';
-import {PieChartOutline, DesktopOutline, UserOutline, TeamOutline, ShopOutline} from '@ant-design/icons-angular/icons';
 import {PortalModule} from "./portal/portal.module";
 
-const icons: IconDefinition[] = [PieChartOutline, DesktopOutline, UserOutline, TeamOutline, ShopOutline];
+
 registerLocaleData(ru);
 
 @NgModule({
@@ -26,7 +24,6 @@ registerLocaleData(ru);
     HomeComponent
   ],
   imports: [
-    NzIconModule.forRoot(icons),
     BrowserModule,
     AppRoutingModule,
     FormsModule,

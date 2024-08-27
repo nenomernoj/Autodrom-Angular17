@@ -15,5 +15,6 @@ export class BreadcrumbService {
 
   setBreadcrumbs(breadcrumbs: Breadcrumb[]) {
     this.breadcrumbs.next(breadcrumbs);
+    localStorage.setItem('breadcrumbs', JSON.stringify(breadcrumbs));
   }
 }

@@ -1,0 +1,20 @@
+
+<nz-table [nzLoading]="loading"  [nzShowPagination]="false" nzSize="middle"  #basicTable [nzData]="taskList">
+  <thead>
+  <tr>
+    <th>Условие</th>
+    <th>Штрафные баллы</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of basicTable.data">
+   <td>{{data.name}}</td>
+    <td><input class="points" nz-input type="number" [(ngModel)]="data.point"></td>
+  </tr>
+  </tbody>
+</nz-table>
+<div class="underTable">
+  <button (click)="updateTaskList()" nz-button nzType="primary">Сохранить изменения</button>
+</div>
+
+

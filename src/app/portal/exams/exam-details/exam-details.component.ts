@@ -1,8 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {BreadcrumbService} from "../../breadcrumbs.service";
-import {drivingLicenses, lessonsList} from "../../mockData";
-import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import {PortalService} from "../../portal.service";
+import {NzMessageService} from "ng-zorro-antd/message";
+
 @Component({
   selector: 'app-exam-details',
   templateUrl: './exam-details.component.html',
@@ -10,33 +12,70 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
 })
 export class ExamDetailsComponent implements OnInit {
   constructor(private route: ActivatedRoute,
+              private router: Router,
+              private portalService: PortalService,
+              private message: NzMessageService,
               private breadcrumbService: BreadcrumbService) {
   }
-  exam:any ={};
-  drivingLicenses = drivingLicenses;
-  lessonsList = lessonsList;
-  todo = this.lessonsList.slice(0, 7);  // Первые 7 элементов
-  done = this.lessonsList.slice(7);     // Оставшиеся элементы
+
+  examId: any = null;
+  loading = false;
+  lessonsList: any[] = [];
+
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
-      const pathId = params.get('id');
-      // Теперь вы можете использовать this.lessonId в вашем компоненте
-      this.exam = this.drivingLicenses.find((el: any) => el.title === pathId);
-      this.breadcrumbService.setBreadcrumbs([
-        {label: 'Главная', url: '/portal'},
-        {label: 'Экзамены', url: '/portal/exams'},
-        {label: this.exam ? this.exam.title : '', url: '/portal/exams/' + pathId},
-      ]);
+      this.examId = params.get('id');
+      this.getLessonsByExam();
     });
   }
-  drop(event: any) {
-    if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-    } else {
-      transferArrayItem(event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex);
-    }
+
+  drop(event: CdkDragDrop<string[]>): void {
+    console.log(event);
+    moveItemInArray(this.lessonsList, event.previousIndex, event.currentIndex);
+    this.lessonsList = event.container.data.map((item: any, index) => {
+      return {
+        id: item.id,
+        name: item.name,
+        order: index,
+        organizationId: item.organizationId
+      }
+    })
+    this.updateList();
+  }
+
+  getLessonsByExam(): void {
+    this.loading = true;
+    this.portalService.getLessonsByExam(this.examId).subscribe(res => {
+      this.loading = false;
+      console.log(res);
+      this.lessonsList = res.body;
+    }, err => {
+      this.loading = false;
+    })
+  }
+
+  updateList(): void {
+    this.loading = true;
+    this.portalService.updateOrderListByExam(this.lessonsList).subscribe(res => {
+      this.loading = false;
+      this.message.success('Порядок сохранен');
+      this.getLessonsByExam();
+    }, err => {
+      this.loading = false;
+    })
+  }
+
+  openDetails(data: any): void {
+    console.log(data);
+    // @ts-ignore
+    const localBreadCrumbs = JSON.parse(localStorage.getItem('breadcrumbs'));
+    console.log(localBreadCrumbs);
+    localBreadCrumbs.push({
+      label: data.name,
+      url: '/portal/exams/' + this.examId + '/' + data.id,
+    });
+    console.log(localBreadCrumbs);
+    this.breadcrumbService.setBreadcrumbs(localBreadCrumbs);
+    this.router.navigate(['/portal/exams/', this.examId, data.id]);
   }
 }

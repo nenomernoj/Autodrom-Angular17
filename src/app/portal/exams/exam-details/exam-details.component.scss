@@ -22,3 +22,6 @@
   background-color: #FFA500; /* Customize the background color of the dragged element preview */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a box shadow to the dragged element preview */
 }
+tr, td{
+  cursor: grabbing;
+}
