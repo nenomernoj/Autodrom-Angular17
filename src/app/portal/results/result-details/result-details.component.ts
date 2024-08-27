@@ -20,7 +20,7 @@ export class ResultDetailsComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       const pathId = params.get('id');
       // Теперь вы можете использовать this.lessonId в вашем компоненте
-      this.result = this.listOfData.find((el: any) => el.id == pathId);
+      this.result = this.listOfData[0];
       const label = this.result.student.name;
       this.breadcrumbService.setBreadcrumbs([
         {label: 'Главная', url: '/portal'},
@@ -29,5 +29,10 @@ export class ResultDetailsComponent implements OnInit {
       ]);
     });
   }
+/*  getDetails(): void {
+    this.portalService.getResultsById(this.resultId).subscribe(res=>{
+      console.log(res);
+    })
+  }*/
 }
 

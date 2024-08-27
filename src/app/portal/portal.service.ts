@@ -55,11 +55,13 @@ export class PortalService {
       observe: 'response'
     });
   }
+
   updateTaskList(data: any): Observable<HttpResponse<any>> {
     return this.http.post(`/api/task/updatetaskerror`, data, {
       observe: 'response'
     });
   }
+
   getVehicleList(): Observable<HttpResponse<any>> {
     const data = {
       pageIndex: 0,
@@ -69,21 +71,25 @@ export class PortalService {
       observe: 'response'
     });
   }
+
   addVenicle(data: any): Observable<HttpResponse<any>> {
     return this.http.post(`/api/vehicle/create`, data, {
       observe: 'response'
     });
   }
+
   updateVenicle(data: any): Observable<HttpResponse<any>> {
     return this.http.post(`/api/vehicle/update`, data, {
       observe: 'response'
     });
   }
+
   deleteVenicle(data: any): Observable<HttpResponse<any>> {
     return this.http.post(`/api/vehicle/delete`, data, {
       observe: 'response'
     });
   }
+
   getCams(): Observable<HttpResponse<any>> {
     const data = {
       pageIndex: 0,
@@ -99,16 +105,19 @@ export class PortalService {
       observe: 'response'
     });
   }
+
   updateDevice(data: any): Observable<HttpResponse<any>> {
     return this.http.post(`/api/device/update`, data, {
       observe: 'response'
     });
   }
+
   deleteDevice(data: any): Observable<HttpResponse<any>> {
     return this.http.post(`/api/device/delete`, data, {
       observe: 'response'
     });
   }
+
   getEnum(key: string): Observable<HttpResponse<any>> {
     return this.http.get(`/api/enum/getenumvale?code=${key}`, {
       observe: 'response'
@@ -130,13 +139,52 @@ export class PortalService {
       observe: 'response'
     });
   }
+
   updateStudent(data: any): Observable<HttpResponse<any>> {
     return this.http.post(`/api/student/update`, data, {
       observe: 'response'
     });
   }
+
   deleteStudent(data: any): Observable<HttpResponse<any>> {
     return this.http.post(`/api/student/delete`, data, {
+      observe: 'response'
+    });
+  }
+
+  getResults(): Observable<HttpResponse<any>> {
+    const data = {
+      pageIndex: 0,
+      pageSize: 999,
+    }
+    return this.http.post(`/api/result/list`, data, {
+      observe: 'response'
+    });
+  }
+
+  getResultsById(id: any): Observable<HttpResponse<any>> {
+    return this.http.get(`/api/result/getbyid?id=${id}`, {
+      observe: 'response'
+    });
+  }
+
+  getListAppointments(): Observable<HttpResponse<any>> {
+    const data = {
+      pageIndex: 0,
+      pageSize: 999,
+    }
+    return this.http.post(`/api/appointment/list`, data, {
+      observe: 'response'
+    });
+  }
+
+  addAppointment(data: any): Observable<HttpResponse<any>> {
+    return this.http.post(`/api/appointment/create`, data, {
+      observe: 'response'
+    });
+  }
+  startTest(id: string): Observable<HttpResponse<any>> {
+    return this.http.post(`/api/test/start`, id, {
       observe: 'response'
     });
   }

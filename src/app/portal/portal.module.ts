@@ -39,6 +39,9 @@ import {NzSelectModule} from "ng-zorro-antd/select";
 import {NzPopconfirmModule} from "ng-zorro-antd/popconfirm";
 import { CamsComponent } from './cams/cams.component';
 import {NzDatePickerComponent} from "ng-zorro-antd/date-picker";
+import {NzSpaceModule} from "ng-zorro-antd/space";
+import {NzFormModule} from "ng-zorro-antd/form";
+import {NzDescriptionsModule} from "ng-zorro-antd/descriptions";
 const icons: IconDefinition[] = [PieChartOutline, DesktopOutline, UserOutline, TeamOutline, ShopOutline, CarOutline, VideoCameraOutline];
 
 @NgModule({
@@ -77,6 +80,7 @@ const icons: IconDefinition[] = [PieChartOutline, DesktopOutline, UserOutline, T
     NzDropDownModule,
     NzAvatarModule,
     NzMenuModule,
+    NzSpaceModule,
     NzMessageModule,
     CalendarModule.forRoot({
       provide: DateAdapter,
@@ -84,9 +88,11 @@ const icons: IconDefinition[] = [PieChartOutline, DesktopOutline, UserOutline, T
     }),
     NzLayoutModule,
     FormsModule,
+    NzFormModule,
     ReactiveFormsModule,
     NzSelectModule,
     NzPopconfirmModule,
+    NzDescriptionsModule,
     NzDatePickerComponent
   ],
   providers: [

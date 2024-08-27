@@ -65,7 +65,7 @@
       <nz-form-item>
         <nz-form-control>
           <nz-input-group>
-            <nz-select formControlName="category" nzPlaceHolder="Категория авто">
+            <nz-select formControlName="categoryId" nzPlaceHolder="Категория авто">
               <nz-option *ngFor="let cat of categorysList" [nzValue]="cat.id"
                          [nzLabel]="cat.code + ' - '+cat.name"></nz-option>
             </nz-select>

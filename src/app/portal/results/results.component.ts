@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {BreadcrumbService} from "../breadcrumbs.service";
-import {examResults} from "../mockResultsExam";
+import {PortalService} from "../portal.service";
 
 @Component({
   selector: 'app-results',
@@ -8,15 +8,24 @@ import {examResults} from "../mockResultsExam";
   styleUrl: './results.component.scss'
 })
 export class ResultsComponent implements OnInit {
-  constructor(private breadcrumbService: BreadcrumbService) {
+  constructor(private breadcrumbService: BreadcrumbService,
+              private portalService: PortalService,) {
   }
 
-  listOfData = examResults;
+  listOfData: any[] = [];
 
   ngOnInit() {
+    this.getResults();
     this.breadcrumbService.setBreadcrumbs([
       {label: 'Главная', url: '/portal'},
       {label: 'Результаты', url: '/portal/results'},
     ]);
+  }
+
+  getResults(): void {
+    this.portalService.getResults().subscribe(res => {
+      console.log(res)
+      this.listOfData = res.body.lists;
+    })
   }
 }

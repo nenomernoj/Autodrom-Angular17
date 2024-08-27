@@ -13,13 +13,13 @@
   </thead>
   <tbody>
   <tr *ngFor="let data of basicTable.data" [routerLink]="[data.id]">
-    <td>{{ data.student.name }}</td>
+    <td>{{ data.student.fullName }}</td>
     <td>{{ data.student.iin }}</td>
-    <td>{{ data.student.category }}</td>
-    <td>{{ data.car.brand }} {{ data.car.model }} VIN: {{ data.car.vin }}</td>
-    <td>{{ data.exam.date | date:"dd.MM.yyyy" }}</td>
-    <td>{{ data.exam.passed ? 'Сдан' : 'Провален' }}</td>
-    <td>{{ data.exam.totalDeductions }}</td>
+    <td>{{ data.vehicle.categoryId }}</td>
+    <td>{{ data.vehicle.brand }} {{ data.vehicle.model }} VIN: {{ data.vehicle.vin }}</td>
+    <td>{{ data.examDate | date:"dd.MM.yyyy" }}</td>
+    <td>{{ data.status ? 'Сдан' : 'Провален' }}</td>
+    <td>{{ data.penaltyPoints }}</td>
   </tr>
   </tbody>
 </nz-table>

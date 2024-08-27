@@ -1,85 +1,81 @@
 <div nz-row class="row text-center">
-  <div nz-col nzSpan="4">
-    <div class="btn-group">
-      <div
-        class="btn btn-primary"
-        mwlCalendarPreviousView
-        [view]="view"
-        [(viewDate)]="viewDate"
-        (viewDateChange)="closeOpenMonthViewDay()"
-      >
-        Previous
-      </div>
-      <div
-        class="btn btn-outline-secondary"
-        mwlCalendarToday
-        [(viewDate)]="viewDate"
-      >
-        Today
-      </div>
-      <div
-        class="btn btn-primary"
-        mwlCalendarNextView
-        [view]="view"
-        [(viewDate)]="viewDate"
-        (viewDateChange)="closeOpenMonthViewDay()"
-      >
-        Next
-      </div>
+  <div nz-col nzSpan="8">
+    <div>
+      <nz-space>
+        <button *nzSpaceItem nz-button nzType="primary" nzSize="small"
+                mwlCalendarPreviousView
+                [view]="view"
+                locale="ru"
+                [(viewDate)]="viewDate"
+                (viewDateChange)="closeOpenMonthViewDay()"
+        >
+          Назад
+        </button>
+        <button *nzSpaceItem
+                nz-button nzType="primary" nzSize="small"
+                mwlCalendarToday
+                [(viewDate)]="viewDate"
+        >
+          Сегодня
+        </button>
+        <button *nzSpaceItem
+                nz-button nzType="primary" nzSize="small"
+                mwlCalendarNextView
+                [view]="view"
+                [(viewDate)]="viewDate"
+                (viewDateChange)="closeOpenMonthViewDay()"
+        >
+          Вперед
+        </button>
+      </nz-space>
     </div>
   </div>
-  <div nz-col nzSpan="4">
-    <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
+  <div nz-col nzSpan="8">
+    <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'ru' }}</h3>
   </div>
-  <div nz-col nzSpan="4">
-    <div class="btn-group">
-      <div
-        class="btn btn-primary"
-        (click)="setView(CalendarView.Month)"
-        [class.active]="view === CalendarView.Month"
-      >
-        Month
-      </div>
-      <div
-        class="btn btn-primary"
-        (click)="setView(CalendarView.Week)"
-        [class.active]="view === CalendarView.Week"
-      >
-        Week
-      </div>
-      <div
-        class="btn btn-primary"
-        (click)="setView(CalendarView.Day)"
-        [class.active]="view === CalendarView.Day"
-      >
-        Day
-      </div>
+  <div nz-col nzSpan="8">
+    <div>
+      <nz-space>
+        <button *nzSpaceItem
+                nz-button nzType="primary" nzSize="small"
+                (click)="setView(CalendarView.Week)"
+                [class.active]="view === CalendarView.Week"
+        >
+          Неделя
+        </button>
+        <button *nzSpaceItem
+                nz-button nzType="primary" nzSize="small"
+                (click)="setView(CalendarView.Day)"
+                [class.active]="view === CalendarView.Day"
+        >
+          День
+        </button>
+      </nz-space>
     </div>
   </div>
 </div>
-<br />
+<br/>
 <div [ngSwitch]="view">
-  <mwl-calendar-month-view
-    *ngSwitchCase="CalendarView.Month"
-    [viewDate]="viewDate"
-    [events]="events"
-    [refresh]="refresh"
-    [activeDayIsOpen]="activeDayIsOpen"
-    (dayClicked)="dayClicked($event.day)"
-    (eventClicked)="handleEvent('Clicked', $event.event)"
-    (eventTimesChanged)="eventTimesChanged($event)"
-  >
-  </mwl-calendar-month-view>
   <mwl-calendar-week-view
+    (hourSegmentClicked)="addNew($event)"
+    [hourSegmentTemplate]="hourSegmentTemplate"
     *ngSwitchCase="CalendarView.Week"
     [viewDate]="viewDate"
+    [locale]="'ru'"
     [events]="events"
+    [dayStartHour]="9"
+    [dayEndHour]="18"
     [refresh]="refresh"
     (eventClicked)="handleEvent('Clicked', $event.event)"
     (eventTimesChanged)="eventTimesChanged($event)"
   >
   </mwl-calendar-week-view>
   <mwl-calendar-day-view
+    (hourSegmentClicked)="addNew($event)"
+    [hourSegmentTemplate]="hourSegmentTemplate"
+    [locale]="'ru'"
+    [dayStartHour]="9"
+    [dayEndHour]="18"
     *ngSwitchCase="CalendarView.Day"
     [viewDate]="viewDate"
     [events]="events"
@@ -90,14 +86,111 @@
   </mwl-calendar-day-view>
 </div>
 
-<!-- Everything you see below is just for the demo, you don't need to include it in your app -->
+<ng-template #hourSegmentTemplate let-segment="segment">
+  <div class="cal-hour-segment">
+    {{ segment.date | date: 'HH:mm' }}
+  </div>
+</ng-template>
+<nz-modal [(nzVisible)]="isVisible" nzTitle="Добавить экзамен" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+  <ng-container *nzModalContent>
+    <div>
+      <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="handleOk()">
+        <nz-form-item>
+          <nz-form-control>
+            <nz-input-group>
+              <nz-select formControlName="organizationId" nzPlaceHolder="Выберите организацию">
+                <nz-option *ngFor="let org of orgsList" [nzValue]="org.id" [nzLabel]="org.name"></nz-option>
+              </nz-select>
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-control>
+            <nz-input-group>
+              <nz-select formControlName="vehicleId" nzPlaceHolder="Выберите АВТО">
+                <nz-option *ngFor="let car of carsList" [nzValue]="car.id"
+                           [nzLabel]="car.brand + ' ' + car.model"></nz-option>
+              </nz-select>
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-control>
+            <nz-input-group>
+              <nz-select formControlName="studentId" nzPlaceHolder="Выберите экзаменуемого">
+                <nz-option *ngFor="let stud of studentsList" [nzValue]="stud.id" [nzLabel]="stud.fullName"></nz-option>
+              </nz-select>
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item style="float: left;
+    margin-right: 20px;">
+          <nz-form-control>
+            <nz-input-group>
+              <nz-date-picker [nzShowTime]="{ nzFormat: 'HH:mm' }" nzShowTime formControlName="startDate"
+                              nzFormat="dd.MM.yyyy HH:mm" nzPlaceHolder="Дата начала"></nz-date-picker>
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-control>
+            <nz-input-group>
+              <nz-date-picker [nzShowTime]="{ nzFormat: 'HH:mm' }" nzPlaceHolder="Дата завершения" nzShowTime
+                              formControlName="endDate"
+                              nzFormat="dd.MM.yyyy HH:mm"></nz-date-picker>
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-control>
+            <nz-input-group>
+              <input type="number" nz-input formControlName="visit" PlaceHolder="Визит"/>
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+      </form>
 
-<br /><br /><br />
-
-<h3>
-  Edit events
-  <button class="btn btn-primary float-end" (click)="addEvent()">
-    Add new
-  </button>
-  <div class="clearfix"></div>
-</h3>
+    </div>
+  </ng-container>
+</nz-modal>
+<nz-modal [nzWidth]="800" [(nzVisible)]="visibleEventModal" nzTitle="Информация о экзамене" [nzFooter]="null"
+          (nzOnCancel)="visibleEventModal = false" (nzOnOk)="visibleEventModal = false">
+  <ng-container *nzModalContent>
+    <nz-descriptions nzTitle="Экзамен">
+      <nz-descriptions-item nzTitle="Время c">{{ modalData?.startDate | date:"dd.MM.yyyy HH:mm" }}
+      </nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Время до">{{ modalData.endDate | date:"dd.MM.yyyy HH:mm" }}</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Категория экзамена">{{ renderCategory(modalData.vehicle?.categoryId) }}
+      </nz-descriptions-item>
+    </nz-descriptions>
+    <nz-descriptions nzTitle="Экзаменуемый">
+      <nz-descriptions-item nzTitle="ФИО">{{ modalData.student?.fullName }}</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="ИИН">{{ modalData.student?.iin }}</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Дата рождения">{{ modalData.student?.birthDate | date:"dd.MM.yyyy" }}
+      </nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Автошкола">{{ modalData.student?.drivingSchool }}</nz-descriptions-item>
+    </nz-descriptions>
+    <nz-descriptions nzTitle="Автомобиль">
+      <nz-descriptions-item nzTitle="Марка\Модель">{{ modalData.vehicle?.brand }} {{ modalData.vehicle?.model }}
+      </nz-descriptions-item>
+      <nz-descriptions-item nzTitle="VIN код">{{ modalData.vehicle?.vin }}</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Год выпуска">{{ modalData.vehicle?.year }}</nz-descriptions-item>
+    </nz-descriptions>
+    <br/>
+    <nz-space>
+      <button
+        *nzSpaceItem
+        nz-popconfirm
+        nzPopconfirmTitle="Начать экзамен? Убедитесь, что экзаменуемый готов"
+        (nzOnConfirm)="startTest(modalData.id)"
+        nz-button nzType="primary">Начать экзамен
+      </button>
+      <button
+        *nzSpaceItem
+        nz-popconfirm
+        nzPopconfirmTitle="Отметить отсутсвие экзаменуемого?"
+        nz-button nzType="primary" nzDanger>Неявка
+      </button>
+    </nz-space>
+  </ng-container>
+</nz-modal>

@@ -24,13 +24,13 @@ export class StudentsComponent implements OnInit {
     iin: FormControl<string>;
     birthDate: FormControl<Date>;
     drivingSchool: FormControl<string>;
-    category: FormControl<string>;
+    categoryId: FormControl<string>;
   }> = this.fb.group({
     fullName: ['', [Validators.required]],
     iin: ['', [Validators.required]],
     birthDate: [new Date(), [Validators.required]],
     drivingSchool: ['', [Validators.required]],
-    category: ['', [Validators.required]],
+    categoryId: ['', [Validators.required]],
   });
   listOfData: any[] = [];
   isVisible = false;
