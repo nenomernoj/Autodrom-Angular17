@@ -31,11 +31,13 @@ import {NzAvatarModule} from "ng-zorro-antd/avatar";
 import {NzMenuModule} from "ng-zorro-antd/menu";
 import {PortalComponent} from "./portal.component";
 import {NzLayoutModule} from "ng-zorro-antd/layout";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {IconDefinition} from "@ant-design/icons-angular";
-import {DesktopOutline, PieChartOutline, ShopOutline, TeamOutline, UserOutline} from "@ant-design/icons-angular/icons";
+import {DesktopOutline, PieChartOutline, ShopOutline, TeamOutline, UserOutline, CarOutline} from "@ant-design/icons-angular/icons";
 import {NzIconModule} from "ng-zorro-antd/icon";
-const icons: IconDefinition[] = [PieChartOutline, DesktopOutline, UserOutline, TeamOutline, ShopOutline];
+import {NzSelectModule} from "ng-zorro-antd/select";
+import {NzPopconfirmModule} from "ng-zorro-antd/popconfirm";
+const icons: IconDefinition[] = [PieChartOutline, DesktopOutline, UserOutline, TeamOutline, ShopOutline, CarOutline];
 registerLocaleData(ru);
 
 @NgModule({
@@ -80,6 +82,9 @@ registerLocaleData(ru);
     }),
     NzLayoutModule,
     FormsModule,
+    ReactiveFormsModule,
+    NzSelectModule,
+    NzPopconfirmModule
   ],
   providers: [
     DataService,

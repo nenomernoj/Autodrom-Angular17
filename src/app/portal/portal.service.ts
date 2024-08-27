@@ -13,7 +13,7 @@ export class PortalService {
   getOrgsList(): Observable<HttpResponse<any>> {
     const data = {
       pageIndex: 0,
-      pageSize: 10,
+      pageSize: 999,
     }
     return this.http.post(`/api/organization/getorganizationlist`, data, {
       observe: 'response'
@@ -57,6 +57,30 @@ export class PortalService {
   }
   updateTaskList(data: any): Observable<HttpResponse<any>> {
     return this.http.post(`/api/task/updatetaskerror`, data, {
+      observe: 'response'
+    });
+  }
+  getVehicleList(): Observable<HttpResponse<any>> {
+    const data = {
+      pageIndex: 0,
+      pageSize: 999,
+    }
+    return this.http.post(`/api/vehicle/getvehiclelist`, data, {
+      observe: 'response'
+    });
+  }
+  addVenicle(data: any): Observable<HttpResponse<any>> {
+    return this.http.post(`/api/vehicle/create`, data, {
+      observe: 'response'
+    });
+  }
+  updateVenicle(data: any): Observable<HttpResponse<any>> {
+    return this.http.post(`/api/vehicle/update`, data, {
+      observe: 'response'
+    });
+  }
+  deleteVenicle(data: any): Observable<HttpResponse<any>> {
+    return this.http.post(`/api/vehicle/delete`, data, {
       observe: 'response'
     });
   }

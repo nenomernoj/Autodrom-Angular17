@@ -1,5 +1,9 @@
 <h2>Автопарк</h2>
-<nz-table class="clickableTable" nzSize="middle" S #basicTable [nzData]="listOfData">
+<button style="margin-bottom: 20px" nz-button (click)="selectedId = null;isVisible = true; validateForm.reset()"
+        nzType="primary">
+  Добавить
+</button>
+<nz-table [nzLoading]="loading" class="clickableTable" nzSize="middle" #basicTable [nzData]="listOfData">
   <thead>
   <tr>
     <th>Бренд</th>
@@ -7,17 +11,76 @@
     <th>Год выпуска</th>
     <th>Категория</th>
     <th>VIN</th>
-    <th>HIK Vision ID</th>
+    <th></th>
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let data of basicTable.data">
-    <td>{{ data.brand }}</td>
-    <td>{{data.model}}</td>
-    <td>{{data.year}}</td>
-    <td>{{data.category}}</td>
-    <td>{{data.vin}}</td>
-    <td>{{data.hikVisionId}}</td>
+  <tr *ngFor="let data of basicTable.data" >
+    <td (click)="selectedId = data.id; editCar(data); isVisible= true;">{{ data.brand }}</td>
+    <td (click)="selectedId = data.id; editCar(data); isVisible= true;">{{ data.model }}</td>
+    <td (click)="selectedId = data.id; editCar(data); isVisible= true;">{{ data.year }}</td>
+    <td (click)="selectedId = data.id; editCar(data); isVisible= true;">{{ renderCategory(data.categoryId) }}</td>
+    <td (click)="selectedId = data.id; editCar(data); isVisible= true;">{{ data.vin }}</td>
+    <td><button
+      nz-popconfirm
+      nzPopconfirmTitle="Удалить авто?"
+      (nzOnConfirm)="deleteCar(data.id)"
+      nz-button nzType="default" nzDanger>Удалить</button></td>
   </tr>
   </tbody>
 </nz-table>
+<nz-modal [(nzVisible)]="isVisible" [nzOkText]="selectedId ? 'Сохранить' : 'Добавить'" [nzOkLoading]="loading"
+          [nzTitle]="selectedId ? 'Редактирование авто' : 'Добавить авто'" (nzOnCancel)="handleCancel()"
+          (nzOnOk)="handleOk()">
+  <ng-container *nzModalContent>
+    <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="handleOk()">
+      <nz-form-item>
+        <nz-form-control>
+          <nz-input-group>
+            <nz-select formControlName="organizationId" nzPlaceHolder="Выберите организацию">
+              <nz-option *ngFor="let org of orgsList" [nzValue]="org.id" [nzLabel]="org.name"></nz-option>
+            </nz-select>
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control>
+          <nz-input-group>
+            <input type="text" nz-input formControlName="brand" PlaceHolder="Марка авто"/>
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control>
+          <nz-input-group>
+            <input type="text" nz-input formControlName="model" PlaceHolder="Модель авто"/>
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control>
+          <nz-input-group>
+            <input type="number" nz-input formControlName="year" PlaceHolder="Год выпуска"/>
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control>
+          <nz-input-group>
+            <input type="text" nz-input formControlName="vin" PlaceHolder="VIN код"/>
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control>
+          <nz-input-group>
+            <nz-select formControlName="categoryId" nzPlaceHolder="Категория авто">
+              <nz-option *ngFor="let cat of categorysList" [nzValue]="cat.id"
+                         [nzLabel]="cat.code + ' - '+cat.name"></nz-option>
+            </nz-select>
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+  </ng-container>
+</nz-modal>
