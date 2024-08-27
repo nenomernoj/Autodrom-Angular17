@@ -19,4 +19,14 @@ export class PortalService {
       observe: 'response'
     });
   }
+  addOrg(data: any): Observable<HttpResponse<any>> {
+    return this.http.post(`/api/organization/create`, data, {
+      observe: 'response'
+    });
+  }
+  editOrg(data: any): Observable<HttpResponse<any>> {
+    return this.http.post(`/api/organization/update`, data, {
+      observe: 'response'
+    });
+  }
 }

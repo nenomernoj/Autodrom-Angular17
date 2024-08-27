@@ -1,2 +1,23 @@
-<button routerLink="org-details" nz-button nzType="primary">Добавить организацию</button>
-<p>organizations works!</p>
+<button style="margin-bottom: 20px" (click)="selectedOrg = null; orgName = ''; showModal()" nz-button nzType="primary">Добавить
+  организацию
+</button>
+<nz-table [nzLoading]="loading" class="clickableTable" #basicTable [nzData]="listOfData">
+  <thead>
+  <tr>
+    <th>Наименование</th>
+  </tr>
+  </thead>
+  <tbody>
+    @for (data of basicTable.data; track data) {
+      <tr (click)="selectedOrg = data; orgName=data.name; showModal()">
+        <td>{{ data.name }}</td>
+      </tr>
+    }
+  </tbody>
+</nz-table>
+<nz-modal [nzOkText]="selectedOrg ? 'Редактировать' : 'Добавить'" [(nzVisible)]="isVisible" [nzTitle]="selectedOrg ? 'Редактировать' : 'Добавить'" (nzOnCancel)="handleCancel()"
+          (nzOnOk)="handleOk()">
+  <ng-container *nzModalContent>
+    <input placeholder="Название организации" nz-input [(ngModel)]="orgName">
+  </ng-container>
+</nz-modal>

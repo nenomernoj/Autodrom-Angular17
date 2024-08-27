@@ -1,273 +1,186 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import {BreadcrumbService} from "../breadcrumbs.service";
-import {examsSchedule} from "../mockSchelduler";
 import {
-  DayPilot,
-  DayPilotCalendarComponent,
-  DayPilotMonthComponent,
-  DayPilotNavigatorComponent
-} from "@daypilot/daypilot-lite-angular";
-import {DataService} from "./data.service";
+  Component,
+  ChangeDetectionStrategy,
+} from '@angular/core';
+import {
+  startOfDay,
+  endOfDay,
+  subDays,
+  addDays,
+  endOfMonth,
+  isSameDay,
+  isSameMonth,
+  addHours,
+} from 'date-fns';
+import { Subject } from 'rxjs';
+import {
+  CalendarEvent,
+  CalendarEventAction,
+  CalendarEventTimesChangedEvent,
+  CalendarView,
+} from 'angular-calendar';
+import { EventColor } from 'calendar-utils';
+
+const colors: Record<string, EventColor> = {
+  red: {
+    primary: '#ad2121',
+    secondary: '#FAE3E3',
+  },
+  blue: {
+    primary: '#1e90ff',
+    secondary: '#D1E8FF',
+  },
+  yellow: {
+    primary: '#e3bc08',
+    secondary: '#FDF1BA',
+  },
+};
+
 @Component({
   selector: 'app-scheduler',
   templateUrl: './scheduler.component.html',
-  styleUrl: './scheduler.component.scss'
+  styleUrl: './scheduler.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SchedulerComponent implements OnInit, AfterViewInit {
-  constructor(private breadcrumbService: BreadcrumbService, private ds: DataService) {
-    this.viewWeek();
-  }
+export class SchedulerComponent {
+  view: CalendarView = CalendarView.Month;
 
-  listOfData = examsSchedule;
+  CalendarView = CalendarView;
 
-  ngOnInit() {
-    this.breadcrumbService.setBreadcrumbs([
-      {label: 'Главная', url: '/portal'},
-      {label: 'Расписание экзаменов', url: '/portal/scheduler'},
-    ]);
-  }
+  viewDate: Date = new Date();
 
-  @ViewChild("day") day!: DayPilotCalendarComponent;
-  @ViewChild("week") week!: DayPilotCalendarComponent;
-  @ViewChild("month") month!: DayPilotMonthComponent;
-  @ViewChild("navigator") nav!: DayPilotNavigatorComponent;
+  modalData: {
+    action: string;
+    event: CalendarEvent;
+  } | undefined;
 
-  events: DayPilot.EventData[] = [];
-
-  date = DayPilot.Date.today();
-
-  contextMenu = new DayPilot.Menu({
-    items: [
-      {
-        text: "Delete",
-        onClick: args => {
-          const event = args.source;
-          const dp = event.calendar;
-          dp.events.remove(event);
-        }
+  actions: CalendarEventAction[] = [
+    {
+      label: '<i class="fas fa-fw fa-pencil-alt"></i>',
+      a11yLabel: 'Edit',
+      onClick: ({ event }: { event: CalendarEvent }): void => {
+        this.handleEvent('Edited', event);
       },
-      {
-        text: "Edit...",
-        onClick: async args => {
-          const event = args.source;
-          const dp = event.calendar;
-
-          const modal = await DayPilot.Modal.prompt("Edit event text:", event.data.text);
-          dp.clearSelection();
-          if (!modal.result) {
-            return;
-          }
-          event.data.text = modal.result;
-          dp.events.update(event);
-        }
+    },
+    {
+      label: '<i class="fas fa-fw fa-trash-alt"></i>',
+      a11yLabel: 'Delete',
+      onClick: ({ event }: { event: CalendarEvent }): void => {
+        this.events = this.events.filter((iEvent) => iEvent !== event);
+        this.handleEvent('Deleted', event);
       },
-      {
-        text: "-"
-      },
-      {
-        text: "Red",
-        onClick: args => {
-          const event = args.source;
-          const dp = event.calendar;
-          event.data.backColor = DataService.colors.red;
-          dp.events.update(event);
-        }
-      },
-      {
-        text: "Green",
-        onClick: args => {
-          const event = args.source;
-          const dp = event.calendar;
-          event.data.backColor = DataService.colors.green;
+    },
+  ];
 
-          dp.events.update(event);
-        }
+  refresh = new Subject<void>();
+
+  events: CalendarEvent[] = [
+    {
+      start: subDays(startOfDay(new Date()), 1),
+      end: addDays(new Date(), 1),
+      title: 'A 3 day event',
+      color: { ...colors['red'] },
+      actions: this.actions,
+      allDay: true,
+      resizable: {
+        beforeStart: true,
+        afterEnd: true,
       },
-      {
-        text: "Blue",
-        onClick: args => {
-          const event = args.source;
-          const dp = event.calendar;
-          event.data.backColor = DataService.colors.blue;
-
-          dp.events.update(event);
-        }
+      draggable: true,
+    },
+    {
+      start: startOfDay(new Date()),
+      title: 'An event with no end date',
+      color: { ...colors['yellow'] },
+      actions: this.actions,
+    },
+    {
+      start: subDays(endOfMonth(new Date()), 3),
+      end: addDays(endOfMonth(new Date()), 3),
+      title: 'A long event that spans 2 months',
+      color: { ...colors['blue'] },
+      allDay: true,
+    },
+    {
+      start: addHours(startOfDay(new Date()), 2),
+      end: addHours(new Date(), 2),
+      title: 'A draggable and resizable event',
+      color: { ...colors['yellow'] },
+      actions: this.actions,
+      resizable: {
+        beforeStart: true,
+        afterEnd: true,
       },
-      {
-        text: "Yellow",
-        onClick: args => {
-          const event = args.source;
-          const dp = event.calendar;
-          event.data.backColor = DataService.colors.yellow;
+      draggable: true,
+    },
+  ];
 
-          dp.events.update(event);
-        }
-      },
+  activeDayIsOpen: boolean = true;
 
-      {
-        text: "Gray",
-        onClick: args => {
-          const event = args.source;
-          const dp = event.calendar;
-          event.data.backColor = DataService.colors.gray;
+  constructor() {}
 
-          dp.events.update(event);
-        }
+  dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
+    if (isSameMonth(date, this.viewDate)) {
+      if (
+        (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
+        events.length === 0
+      ) {
+        this.activeDayIsOpen = false;
+      } else {
+        this.activeDayIsOpen = true;
       }
-    ]
-  });
-
-  configNavigator: DayPilot.NavigatorConfig = {
-    locale: 'ru-RU',
-    showMonths: 3,
-    cellWidth: 25,
-    cellHeight: 25,
-    onVisibleRangeChanged: args => {
-      this.loadEvents();
+      this.viewDate = date;
     }
-  };
-
-  selectTomorrow() {
-    this.date = DayPilot.Date.today().addDays(1);
   }
 
-  changeDate(date: DayPilot.Date): void {
-    this.configDay.startDate = date;
-    this.configWeek.startDate = date;
-    this.configMonth.startDate = date;
-  }
-
-  configDay: DayPilot.CalendarConfig = {
-    durationBarVisible: false,
-    contextMenu: this.contextMenu,
-    onTimeRangeSelected: this.onTimeRangeSelected.bind(this),
-    onBeforeEventRender: this.onBeforeEventRender.bind(this),
-    onEventClick: this.onEventClick.bind(this),
-  };
-
-  configWeek: DayPilot.CalendarConfig = {
-    viewType: "Week",
-    durationBarVisible: false,
-    contextMenu: this.contextMenu,
-    onTimeRangeSelected: this.onTimeRangeSelected.bind(this),
-    onBeforeEventRender: this.onBeforeEventRender.bind(this),
-    onEventClick: this.onEventClick.bind(this),
-  };
-
-  configMonth: DayPilot.MonthConfig = {
-    contextMenu: this.contextMenu,
-    eventBarVisible: false,
-    onTimeRangeSelected: this.onTimeRangeSelected.bind(this),
-    onEventClick: this.onEventClick.bind(this),
-  };
-
-  ngAfterViewInit(): void {
-    this.loadEvents();
-  }
-
-  loadEvents(): void {
-    const from = this.nav.control.visibleStart();
-    const to = this.nav.control.visibleEnd();
-    this.ds.getEvents(from, to).subscribe(result => {
-      this.events = result;
-    });
-  }
-
-  viewDay(): void {
-    this.configNavigator.selectMode = "Day";
-    this.configDay.visible = true;
-    this.configWeek.visible = false;
-    this.configMonth.visible = false;
-  }
-
-  viewWeek(): void {
-    this.configNavigator.selectMode = "Week";
-    this.configDay.visible = false;
-    this.configWeek.visible = true;
-    this.configMonth.visible = false;
-  }
-
-  viewMonth(): void {
-    this.configNavigator.selectMode = "Month";
-    this.configDay.visible = false;
-    this.configWeek.visible = false;
-    this.configMonth.visible = true;
-  }
-
-  onBeforeEventRender(args: any) {
-    const dp = args.control;
-    args.data.areas = [
-      {
-        top: 3,
-        right: 3,
-        width: 20,
-        height: 20,
-        symbol: "/icons/daypilot.svg#minichevron-down-2",
-        fontColor: "#fff",
-        toolTip: "Show context menu",
-        action: "ContextMenu",
-      },
-      {
-        top: 3,
-        right: 25,
-        width: 20,
-        height: 20,
-        symbol: "/icons/daypilot.svg#x-circle",
-        fontColor: "#fff",
-        action: "None",
-        toolTip: "Delete event",
-        onClick: async (args: any) => {
-          dp.events.remove(args.source);
-        }
+  eventTimesChanged({
+                      event,
+                      newStart,
+                      newEnd,
+                    }: CalendarEventTimesChangedEvent): void {
+    this.events = this.events.map((iEvent) => {
+      if (iEvent === event) {
+        return {
+          ...event,
+          start: newStart,
+          end: newEnd,
+        };
       }
-    ];
-
-    args.data.areas.push({
-      bottom: 5,
-      left: 5,
-      width: 36,
-      height: 36,
-      action: "None",
-      image: `https://picsum.photos/36/36?random=${args.data.id}`,
-      style: "border-radius: 50%; border: 2px solid #fff; overflow: hidden;",
+      return iEvent;
     });
+    this.handleEvent('Dropped or resized', event);
   }
 
-  async onTimeRangeSelected(args: any) {
-    const modal = await DayPilot.Modal.prompt("Бронирование времени:", "Event 1");
-    const dp = args.control;
-    dp.clearSelection();
-    if (!modal.result) {
-      return;
-    }
-    dp.events.add(new DayPilot.Event({
-      start: args.start,
-      end: args.end,
-      id: DayPilot.guid(),
-      text: modal.result
-    }));
+  handleEvent(action: string, event: CalendarEvent): void {
+    this.modalData = { event, action };
   }
 
-  async onEventClick(args: any) {
-    const form = [
-      {name: "Text", id: "text"},
-      {name: "Start", id: "start", dateFormat: "MM/dd/yyyy", type: "datetime"},
-      {name: "End", id: "end", dateFormat: "MM/dd/yyyy", type: "datetime"},
-      {name: "Color", id: "backColor", type: "select", options: this.ds.getColors()},
+  addEvent(): void {
+    this.events = [
+      ...this.events,
+      {
+        title: 'New event',
+        start: startOfDay(new Date()),
+        end: endOfDay(new Date()),
+        color: colors['red'],
+        draggable: true,
+        resizable: {
+          beforeStart: true,
+          afterEnd: true,
+        },
+      },
     ];
-
-    const data = args.e.data;
-
-    const modal = await DayPilot.Modal.form(form, data);
-
-    if (modal.canceled) {
-      return;
-    }
-
-    const dp = args.control;
-
-    dp.events.update(modal.result);
   }
 
+  deleteEvent(eventToDelete: CalendarEvent) {
+    this.events = this.events.filter((event) => event !== eventToDelete);
+  }
 
+  setView(view: CalendarView) {
+    this.view = view;
+  }
+
+  closeOpenMonthViewDay() {
+    this.activeDayIsOpen = false;
+  }
 }

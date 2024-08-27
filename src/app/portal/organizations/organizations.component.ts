@@ -12,6 +12,13 @@ export class OrganizationsComponent implements OnInit {
               private portalService: PortalService) {
   }
 
+  isVisible = false;
+  listOfData: any[] = [];
+  total = 0;
+  loading = false;
+  orgName = '';
+  selectedOrg: any = null;
+
   ngOnInit() {
     this.breadcrumbService.setBreadcrumbs([
       {label: 'Главная', url: '/portal'},
@@ -21,8 +28,38 @@ export class OrganizationsComponent implements OnInit {
   }
 
   getOrgs(): void {
+    this.loading = true;
     this.portalService.getOrgsList().subscribe(res => {
-      console.log(res);
+      this.total = res.body.count;
+      this.listOfData = res.body.lists;
+      this.loading = false;
+    }, err => {
+      this.loading = false;
     })
+  }
+
+  showModal(): void {
+    this.isVisible = true;
+  }
+
+  handleOk(): void {
+    console.log(this.selectedOrg, this.orgName);
+    if (this.selectedOrg) {
+      this.portalService.editOrg({id: this.selectedOrg.id, name: this.orgName}).subscribe(res => {
+        this.isVisible = false;
+        this.getOrgs();
+      });
+    } else {
+      this.portalService.addOrg({name: this.orgName}).subscribe(res => {
+        this.isVisible = false;
+        this.getOrgs();
+      });
+
+    }
+  }
+
+  handleCancel(): void {
+    console.log('Button cancel clicked!');
+    this.isVisible = false;
   }
 }
