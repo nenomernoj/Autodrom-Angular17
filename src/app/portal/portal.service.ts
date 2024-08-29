@@ -188,4 +188,11 @@ export class PortalService {
       observe: 'response'
     });
   }
+
+  getTaskByExamId(id: any): Observable<HttpResponse<any>> {
+    return this.http.get(`/api/lesson/listlessonbytask?examineId=${id}`, {
+      observe: 'response'
+    });
+  }
+
 }
